@@ -11,23 +11,32 @@ public partial class Main : CanvasLayer
         {
             if (@event.IsActionPressed("Click"))
             {
-                GD.Print("barf");
-
                 Vector2 mp = mouseEvent.Position;
                 Vector2 gp = mouseEvent.GlobalPosition;
-                GD.Print(mp);
-                var map = GetNode<TileMapLayer>("TileMapLayer");
+
+                TileMapLayer map = GetNode<TileMapLayer>("TileMapLayer");
                 Vector2I v = map.LocalToMap((Vector2I)mp);
+                
                 TileData tile = map.GetCellTileData(v);
-                GD.Print(tile);
+                if (!tile.HasCustomData("IsPath"))
+                {
+                    tile.SetCustomData("IsPath", false);
+                }
 
-                //foreach(Vector2I cell in map.GetSurroundingCells(v) ) {
-                //    map.SetCell(cell, 3, new Vector2I(1, 0));
-                //}
+                bool foo = (bool)tile.GetCustomData("IsPath");
+                if (!foo)
+                {
+                    map.SetCell(v, 3, new Vector2I(1, 0));
+                    tile.SetCustomData("IsPath", true);
+                }
+                else
+                {
+                    map.SetCell(v, 3, new Vector2I(0, 0));
+                    tile.SetCustomData("IsPath", false);
+                }
 
-                //var c = map.GetCellSourceId(v);
-
-                map.SetCell(v, 3, new Vector2I(1,0));
+                int cID = map.GetCellSourceId(v);
+                
                 GD.Print(v.X, v.Y); 
 
             }
