@@ -26,6 +26,11 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Tower Defence- Origins"
 
+[global_group]
+
+badguys=""
+pfs=""
+
 [input]
 
 Click={

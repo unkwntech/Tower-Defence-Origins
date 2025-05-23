@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://lbken61io5wh"]
+
+[ext_resource type="Texture2D" uid="uid://cyhe66l62fg8y" path="res://Assets/Sprites/Octagon.png" id="1_lf2yb"]
+[ext_resource type="Script" uid="uid://cy5k3548y087e" path="res://Badguy.cs" id="2_apgvv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lf2yb"]
+radius = 14.0357
+
+[node name="badguy" type="RigidBody2D" groups=["badguys"]]
+script = ExtResource("2_apgvv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lf2yb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_lf2yb")
